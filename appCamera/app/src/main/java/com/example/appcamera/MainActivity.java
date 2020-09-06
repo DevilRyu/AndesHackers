@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1888;
     private ImageView imageViewXD;
-    private TextView textView;
+    //Marcelin si no funciona borralo
+    private TextView textView, tratamiento, medicamentos;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     Interpreter tflite;
     //directory donde se guardo la foto
@@ -64,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         Button loadPic = (Button) this.findViewById(R.id.load);
         textView = (TextView) this.findViewById(R.id.classification);
         imageViewXD =  (ImageView) this.findViewById(R.id.showPic);
-
-
+        medicamentos = (TextView) this.findViewById(R.id.medicamentos);
+        tratamiento = (TextView) this.findViewById(R.id.tratamiento);
 
         takePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +160,37 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.e("tag", "Classification:" + labelXD[classMaxPos]);
                     textView.setText(labelXD[classMaxPos]);
+                    
+                    //Marcelin si esta mal borralo 
+                    if(textView.getText().equals("actinic keratosis")){
+                        medicamentos.setText("Topical fluorouracil Cream (0.5%).\n Imiquimod 5% cream. \n  Ingenol mebutate  0.015% gel");
+                        tratamiento.setText("Destructive therapies: surgery, cryotherapy, dermabrasion, photodynamic therapy.\n Topical medications, \n Field ablation treatments: chemical peels, laser resurfacing");
+                    }else if(textView.getText().equals("basal cell carcinoma")){
+                        medicamentos.setText("");
+                        tratamiento.setText("No Problem");
+                    }else if(textView.getText().equals("dermatofibroma")){
+                        medicamentos.setText("");
+                        tratamiento.setText("no treatment is required unless the lesion is symptomatic. Liquid nitrogen cryotherapy may be an alternative treatment option");
+                    }else if(textView.getText().equals("melanoma")){
+                        medicamentos.setText("");
+                        tratamiento.setText("No Problem");
+                    }else if(textView.getText().equals("pigmented benign keratosis")){
+                        medicamentos.setText("");
+                        tratamiento.setText("Cryotherapy, Curettage/shave excision, or Electrodesiccation");
+                    }else if(textView.getText().equals("seborrheic keratosis")){
+                        medicamentos.setText("");
+                        tratamiento.setText("Cryotherapy, Curettage/shave excision, or Electrodesiccation");
+                    }else if(textView.getText().equals("squamous cell carcinoma")){
+                        medicamentos.setText("");
+                        tratamiento.setText("No problem");
+                    }else if(textView.getText().equals("vascular lesion")){
+                        medicamentos.setText("");
+                        tratamiento.setText("No problem");
+                    }else if(textView.getText().equals("nevus")){
+                        medicamentos.setText("");
+                        tratamiento.setText("No Problem");
+                    }
+                    
                     /*
                     int size = resized.getRowBytes()*resized.getHeight();
                     byte[] bytesOfArrImg = new byte[size];
